@@ -1,0 +1,12 @@
+{
+  "extends": ["plugin:react/recommended"],
+  "parser": "babel-eslint",
+  "rules": {
+    "react/display-name": 0,
+    "react/jsx-wrap-multilines": 1,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+  },
+  "plugins": [
+    "react"
+  ]
+}

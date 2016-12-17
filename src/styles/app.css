@@ -1,0 +1,54 @@
+body {
+  background: grey;
+}
+
+#root {
+  width: 100%;
+}
+
+#root > div {
+  display: flex;
+}
+
+.wrap {
+  width: 100%;
+  display: flex;
+}
+
+.grid {
+  width: 100%;
+  height: 100%;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  /*flex: auto;*/
+}
+
+.cell:before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+  float: left;
+}
+
+.cell {
+  border: 1px solid darkgrey;
+  /*flex: auto;*/
+  display: flex;
+  background: grey;
+  height: 100px;
+  width: 100px;
+}
+
+.controls {
+  width: 100px;
+}
+
+.column .cell {
+  border: 1px solid grey;
+}
