@@ -13,7 +13,11 @@ class App extends Component {
   get controls() {
     return zeroArray(5).map((cell, i) => {
       return (
-        <div key={i} className='cell'></div>
+        <div key={i} className='cell'>
+          <div className='tile'>
+            <span className='numero'>{i}</span>
+          </div>
+        </div>
       );
     });
   }

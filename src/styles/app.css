@@ -1,5 +1,6 @@
 body {
   background: grey;
+  font-family: consolas, sans-serif;
 }
 
 #root {
@@ -51,4 +52,18 @@ body {
 
 .column .cell {
   border: 1px solid grey;
+}
+
+.tile {
+  border: 1px solid green;
+  flex: auto;
+  display: flex;
+  align-items: center;
+  cursor: move;
+}
+.numero {
+  text-align: center;
+  width: 100%;
+  color: white;
+  user-select: none;
 }
