@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
 import Square from './square';
 
 const zeroArray = (n) => new Array(n).fill(0);
@@ -16,10 +15,7 @@ class Grid extends Component {
       return (
         <div key={i} className='row'>{row.map((r, j) => {
           return (
-            <Square key={j}>
-              {this.props.hovered &&
-                <Tile data={todo} />
-              }
+            <Square hoverTile={this.props.hoverTile} key={j}>
             </Square>
           );
         })}</div>

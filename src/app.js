@@ -9,10 +9,13 @@ class App extends Component {
 
   constructor(props: object) {
     super(props);
+    this.state = {
+      controlTiles: zeroArray(5),
+    };
   }
 
   get controls() {
-    return zeroArray(5).map((cell, i) => {
+    return this.state.controlTiles.map((cell, i) => {
       return (
         <div key={i} className='cell'>
           <Tile
@@ -27,7 +30,7 @@ class App extends Component {
     return (
       <div>
         <div className='controls'>{this.controls}</div>
-        <Grid />
+        <Grid hoverTile={this.state.controlTiles[0]} />
       </div>
     )
   }
