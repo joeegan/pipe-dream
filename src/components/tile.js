@@ -10,7 +10,7 @@ class Tile extends Component {
   render() {
     return (
       <div className='tile'>
-        <span className='numero'>{this.props.id}</span>
+        <span className={this.props.type}></span>
       </div>
     )
   }

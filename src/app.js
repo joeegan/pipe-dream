@@ -20,7 +20,7 @@ class App extends Component {
       return (
         <div key={i} className='cell'>
           <Tile
-            id={cell}
+            type={cell}
           />
         </div>
       );
