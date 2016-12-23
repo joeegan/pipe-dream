@@ -4,13 +4,13 @@ import Tile from './tile';
 class Square extends Component {
 
   constructor(props: object) {
-    super(props);
+    super(props)
     this.state = {
       hovered: false,
     }
-    this.handleMouseEnter = this.handleMouseEnter.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.handleMouseDown = this.handleMouseDown.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this)
+    this.handleMouseLeave = this.handleMouseLeave.bind(this)
+    this.handleMouseDown = this.handleMouseDown.bind(this)
   }
 
   handleMouseEnter() {
@@ -52,6 +52,12 @@ class Square extends Component {
     )
   }
 
+}
+
+Square.propTypes = {
+  startRotation: PropTypes.string,
+  hasStartPipe: PropTypes.bool,
+  hoverTile: PropTypes.string,
 }
 
 export default Square;

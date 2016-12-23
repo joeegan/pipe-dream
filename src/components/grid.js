@@ -13,7 +13,6 @@ const startCoordinates = [
   _.random(1, NUMBER_OF_COLS-2),
 ]
 const startRotation = _.sample(Object.keys(StartTypes))
-console.log('st', startRotation);
 
 class Grid extends Component {
 
@@ -43,5 +42,11 @@ class Grid extends Component {
   }
 
 }
+
+Grid.propTypes = {
+  handleTilePlaced: PropTypes.func,
+  hoverTile: PropTypes.string,
+}
+
 
 export default Grid;

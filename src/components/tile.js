@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import _ from 'lodash';
+import React, { Component, PropTypes } from 'react'
+import { PipeTypes } from '../constants'
+import _ from 'lodash'
 
 class Tile extends Component {
 
@@ -14,12 +15,18 @@ class Tile extends Component {
               }}
       >
         <span className={pipeClassName} />
-        {this.props.type == 'CROSS' &&
+        {this.props.type === 'CROSS' &&
           <span className={pipeClassName} />
         }
+        <span className='water' />
       </div>
     )
   }
+}
+
+Tile.propTypes = {
+  type: React.PropTypes.string,
+  hovered: React.PropTypes.bool,
 }
 
 export default Tile;

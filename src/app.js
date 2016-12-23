@@ -10,7 +10,6 @@ class App extends Component {
 
   constructor(props: object) {
     super(props)
-    console.log(PipeTypes);
     this.state = {
       controlTiles: _.shuffle(Object.keys(PipeTypes)),
     }
