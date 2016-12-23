@@ -22,9 +22,24 @@ body {
   cursor: pointer;
 }
 
+.controls {
+  width: 100px;
+}
+
 .row {
   display: flex;
   flex-direction: row;
+}
+
+.cell {
+  border: 1px solid white;
+  display: flex;
+  background: #eee;
+  position: relative;
+  width: 98px;
+  height: 98px;
+  user-select: none;
+  overflow: hidden;
 }
 
 .cell:before {
@@ -34,99 +49,8 @@ body {
   float: left;
 }
 
-.cell {
-  border: 1px solid white;
-  display: flex;
-  background: #eee;
-  height: 100px;
-  width: 100px;
-  position: relative;
-}
-
-.controls {
-  width: 100px;
-}
-
-.column .cell {
-  border: 1px solid #eee;
-}
-
 .tile {
-  flex: auto;
-  display: flex;
-  align-items: center;
   position: absolute;
   height: 100%;
   width: 100%;
-}
-
-.cell span {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  user-select: none;
-  background: grey;
-  position: relative;
-  overflow: hidden;
-}
-
-.cross:after,
-.cell span:before {
-  content: "";
-  display: block;
-  position: absolute;
-  border: solid 10px white;
-  width: 0px;
-  height: 100%;
-  left: 40px;
-}
-
-.cross:after,
-.horizontal {
-  transform: rotate(90deg);
-}
-
-.cross:after {
-  top: -10px
-}
-
-.cell .top_to_left:before,
-.cell .top_to_right:before,
-.cell .bottom_to_left:before,
-.cell .bottom_to_right:before {
-  width: 100%;
-  border-radius: 30px;
-  border-width: 20px;
-}
-
-.cell .bottom_to_left:before {
-  transform: translate(-120px, 40px);
-}
-.cell .top_to_left:before {
-  transform: translate(0px, -80px);
-}
-.cell .top_to_right:before {
-  transform: translate(-120px, -80px);
-}
-.cell .bottom_to_right:before {
-  transform: translate(0px, 40px);
-}
-
-.cell .left:before,
-.cell .right:before,
-.cell .top:before,
-.cell .bottom:before {
-  height: 50%;
-  border-bottom: none;
-  border-top: none;
-}
-
-.cell .left:before {
-  transform: rotate(90deg) translate(25px, 25px);
-}
-.cell .right:before {
-  transform: rotate(90deg) translate(25px, -25px);
-}
-.cell .bottom:before {
- transform: translate(0px, 50px);
 }
