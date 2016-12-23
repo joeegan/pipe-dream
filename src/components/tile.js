@@ -6,6 +6,7 @@ class Tile extends Component {
 
   render() {
     const pipeClassName= `pipe ${this.props.type}`
+    const waterRunningClassName = `water ${this.props.waterRunning ? 'running' : ''}`
     return (
       <div className='tile'
            style={{
@@ -14,11 +15,12 @@ class Tile extends Component {
                 zIndex: this.props.hovered ? 1 : 0,
               }}
       >
-        <span className={pipeClassName} />
+        <span className={pipeClassName}>
+          <span className={waterRunningClassName} />
+        </span>
         {this.props.type === 'CROSS' &&
           <span className={pipeClassName} />
         }
-        <span className='water' />
       </div>
     )
   }
@@ -27,6 +29,7 @@ class Tile extends Component {
 Tile.propTypes = {
   type: React.PropTypes.string,
   hovered: React.PropTypes.bool,
+  waterRunning: React.PropTypes.bool,
 }
 
 export default Tile;

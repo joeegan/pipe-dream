@@ -12,7 +12,13 @@ class App extends Component {
     super(props)
     this.state = {
       controlTiles: _.shuffle(Object.keys(PipeTypes)),
+      waterRunning: false,
     }
+    setTimeout(() => {
+      this.setState({
+        waterRunning: true,
+      })
+    }, 3000);
     this.handleTilePlaced = this.handleTilePlaced.bind(this)
   }
 
@@ -40,7 +46,8 @@ class App extends Component {
     return (
       <div>
         <div className='controls'>{this.controls}</div>
-        <Grid hoverTile={this.state.controlTiles[0]}
+        <Grid waterRunning={this.state.waterRunning}
+              hoverTile={this.state.controlTiles[0]}
               handleTilePlaced={this.handleTilePlaced} />
       </div>
     )

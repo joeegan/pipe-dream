@@ -54,3 +54,20 @@
 .bottom {
  transform: translate(0, 49px);
 }
+
+.water {
+  display: block;
+  background: lightblue;
+  position: absolute;
+  width: 20px;
+  transition: height 5s;
+  height: 0;
+  margin-left: -10px;
+}
+.top .water,
+.right .water {
+  bottom: 0px;
+}
+.water.running {
+  height: 100%;
+}

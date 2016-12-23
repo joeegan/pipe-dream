@@ -22,6 +22,7 @@ class Grid extends Component {
         <div key={i} className='row'>{row.map((r, j) => {
           return (
             <Square
+              waterRunning={this.props.waterRunning}
               hasStartPipe={_.isEqual(startCoordinates, [i,j], startCoordinates)}
               startRotation={startRotation}
               hoverTile={this.props.hoverTile}
@@ -44,6 +45,7 @@ class Grid extends Component {
 }
 
 Grid.propTypes = {
+  waterRunning: PropTypes.bool,
   handleTilePlaced: PropTypes.func,
   hoverTile: PropTypes.string,
 }
