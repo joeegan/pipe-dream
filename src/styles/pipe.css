@@ -9,13 +9,9 @@
   left: 38px;
 }
 
-.cross:after,
+.cross:last-of-type,
 .horizontal {
   transform: rotate(90deg) translate(0px, -1px);
-}
-
-.cross:after {
-  top: -10px
 }
 
 .top_to_left,
