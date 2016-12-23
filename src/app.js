@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Grid from './components/grid'
 import Tile from './components/tile'
 import _ from 'lodash'
-import pipeTypes from './pipe-types'
+import { PipeTypes } from './constants'
 
 const zeroArray = (n) => new Array(n).fill(0)
 
@@ -10,8 +10,9 @@ class App extends Component {
 
   constructor(props: object) {
     super(props)
+    console.log(PipeTypes);
     this.state = {
-      controlTiles: _.shuffle(pipeTypes),
+      controlTiles: _.shuffle(Object.keys(PipeTypes)),
     }
     this.handleTilePlaced = this.handleTilePlaced.bind(this)
   }
@@ -31,7 +32,7 @@ class App extends Component {
   handleTilePlaced() {
     this.setState({
       controlTiles: this.state.controlTiles
-                      .concat(_.sample(pipeTypes))
+                      .concat(_.sample(Object.keys(PipeTypes)))
                       .slice(1)
     })
   }

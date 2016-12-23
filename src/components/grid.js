@@ -1,15 +1,21 @@
-import React, { Component, PropTypes } from 'react';
-import Square from './square';
+import React, { Component, PropTypes } from 'react'
+import Square from './square'
+import _ from 'lodash'
+import { StartTypes } from '../constants'
 
-const zeroArray = (n) => new Array(n).fill(0);
-const grid = zeroArray(7).map(n => zeroArray(10));
+const NUMBER_OF_COLS = 10
+const NUMBER_OF_ROWS = 7
+
+const zeroArray = (n) => new Array(n).fill(0)
+const grid = zeroArray(NUMBER_OF_ROWS).map(n => zeroArray(NUMBER_OF_COLS))
+const startCoordinates = [
+  _.random(1, NUMBER_OF_ROWS-2),
+  _.random(1, NUMBER_OF_COLS-2),
+]
+const startRotation = _.sample(Object.keys(StartTypes))
+console.log('st', startRotation);
 
 class Grid extends Component {
-
-  constructor(props: object) {
-    super(props);
-    this.handleTilePlaced = this.handleTilePlaced.bind(this);
-  }
 
   get grid() {
     return grid.map((row, i) => {
@@ -17,19 +23,17 @@ class Grid extends Component {
         <div key={i} className='row'>{row.map((r, j) => {
           return (
             <Square
+              hasStartPipe={_.isEqual(startCoordinates, [i,j], startCoordinates)}
+              startRotation={startRotation}
               hoverTile={this.props.hoverTile}
-              handleTilePlaced={this.handleTilePlaced}
+              handleTilePlaced={this.props.handleTilePlaced}
               key={j}
             >
             </Square>
-          );
+          )
         })}</div>
-      );
-    });
-  }
-
-  handleTilePlaced() {
-    this.props.handleTilePlaced();
+      )
+    })
   }
 
   render() {
@@ -37,6 +41,7 @@ class Grid extends Component {
       <div className='grid'>{this.grid}</div>
     )
   }
+
 }
 
 export default Grid;

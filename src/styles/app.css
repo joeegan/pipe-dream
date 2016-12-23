@@ -90,24 +90,43 @@ body {
   top: -10px
 }
 
-.cell .topToLeft:before,
-.cell .topToRight:before,
-.cell .bottomToLeft:before,
-.cell .bottomToRight:before {
+.cell .top_to_left:before,
+.cell .top_to_right:before,
+.cell .bottom_to_left:before,
+.cell .bottom_to_right:before {
   width: 100%;
   border-radius: 30px;
   border-width: 20px;
 }
 
-.cell .bottomToLeft:before {
+.cell .bottom_to_left:before {
   transform: translate(-120px, 40px);
 }
-.cell .topToLeft:before {
+.cell .top_to_left:before {
   transform: translate(0px, -80px);
 }
-.cell .topToRight:before {
+.cell .top_to_right:before {
   transform: translate(-120px, -80px);
 }
-.cell .bottomToRight:before {
+.cell .bottom_to_right:before {
   transform: translate(0px, 40px);
+}
+
+.cell .left:before,
+.cell .right:before,
+.cell .top:before,
+.cell .bottom:before {
+  height: 50%;
+  border-bottom: none;
+  border-top: none;
+}
+
+.cell .left:before {
+  transform: rotate(90deg) translate(25px, 25px);
+}
+.cell .right:before {
+  transform: rotate(90deg) translate(25px, -25px);
+}
+.cell .bottom:before {
+ transform: translate(0px, 50px);
 }

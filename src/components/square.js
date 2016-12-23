@@ -45,6 +45,9 @@ class Square extends Component {
         {this.state.tile &&
           <Tile hovered={false} type={this.state.tile} />
         }
+        {this.props.hasStartPipe &&
+          <Tile hovered={false} type={this.props.startRotation} />
+        }
       </div>
     )
   }

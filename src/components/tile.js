@@ -3,10 +3,6 @@ import _ from 'lodash';
 
 class Tile extends Component {
 
-  constructor(props: object) {
-    super(props);
-  }
-
   render() {
     return (
       <div className='tile'>
