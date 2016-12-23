@@ -1,5 +1,4 @@
 body {
-  background: grey;
   font-family: consolas, sans-serif;
 }
 
@@ -27,7 +26,6 @@ body {
 .row {
   display: flex;
   flex-direction: row;
-  /*flex: auto;*/
 }
 
 .cell:before {
@@ -38,10 +36,9 @@ body {
 }
 
 .cell {
-  border: 1px solid darkgrey;
-  /*flex: auto;*/
+  border: 1px dashed #ccc;
   display: flex;
-  background: grey;
+  background: #eee;
   height: 100px;
   width: 100px;
   position: relative;
@@ -52,19 +49,18 @@ body {
 }
 
 .column .cell {
-  border: 1px solid grey;
+  border: 1px solid #eee;
 }
 
 .tile {
-  border: 1px solid green;
   flex: auto;
   display: flex;
   align-items: center;
   cursor: move;
 }
+
 .numero {
   text-align: center;
   width: 100%;
-  color: white;
   user-select: none;
 }
