@@ -43,7 +43,7 @@ class Square extends Component {
           <Tile hovered={true} type={this.props.hoverTile} />
         }
         {this.state.tile &&
-          <Tile type={this.state.tile} />
+          <Tile hovered={false} type={this.state.tile} />
         }
       </div>
     )

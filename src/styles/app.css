@@ -34,7 +34,7 @@ body {
 }
 
 .cell {
-  border: 1px dashed #ccc;
+  border: 1px solid yellow;
   display: flex;
   background: #eee;
   height: 100px;
@@ -54,6 +54,9 @@ body {
   flex: auto;
   display: flex;
   align-items: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 .cell span {
@@ -91,14 +94,14 @@ body {
 }
 
 .cell .bottomToLeft:before {
-  transform: translate(-120px, 32px);
+  transform: translate(-120px, 40px);
 }
 .cell .topToLeft:before {
-  transform: translate(0px, -77px);
+  transform: translate(0px, -80px);
 }
 .cell .topToRight:before {
-  transform: translate(-120px, -77px);
+  transform: translate(-120px, -80px);
 }
 .cell .bottomToRight:before {
-  transform: translate(0px, 32px);
+  transform: translate(0px, 40px);
 }
