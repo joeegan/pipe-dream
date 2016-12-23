@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Grid from './components/grid'
 import Tile from './components/tile'
 import _ from 'lodash';
+import pipeTypes from './pipe-types';
 
 const zeroArray = (n) => new Array(n).fill(0);
 
@@ -10,7 +11,7 @@ class App extends Component {
   constructor(props: object) {
     super(props);
     this.state = {
-      controlTiles: zeroArray(5),
+      controlTiles: _.shuffle((pipeTypes)),
     };
   }
 
@@ -19,7 +20,7 @@ class App extends Component {
       return (
         <div key={i} className='cell'>
           <Tile
-            id={i}
+            id={cell}
           />
         </div>
       );
