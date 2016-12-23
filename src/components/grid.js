@@ -8,6 +8,7 @@ class Grid extends Component {
 
   constructor(props: object) {
     super(props);
+    this.handleTilePlaced = this.handleTilePlaced.bind(this);
   }
 
   get grid() {
@@ -15,12 +16,20 @@ class Grid extends Component {
       return (
         <div key={i} className='row'>{row.map((r, j) => {
           return (
-            <Square hoverTile={this.props.hoverTile} key={j}>
+            <Square
+              hoverTile={this.props.hoverTile}
+              handleTilePlaced={this.handleTilePlaced}
+              key={j}
+            >
             </Square>
           );
         })}</div>
       );
     });
+  }
+
+  handleTilePlaced() {
+    this.props.handleTilePlaced();
   }
 
   render() {

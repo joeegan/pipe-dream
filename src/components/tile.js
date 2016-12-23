@@ -10,7 +10,9 @@ class Tile extends Component {
   render() {
     return (
       <div className='tile'>
-        <span className={this.props.type}></span>
+        <span className={this.props.type}
+              style={{ opacity: this.props.hovered ? 0.4 : 1 }}
+        ></span>
       </div>
     )
   }

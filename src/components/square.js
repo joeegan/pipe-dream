@@ -10,6 +10,7 @@ class Square extends Component {
     }
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
     this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseDown = this.handleMouseDown.bind(this);
   }
 
   handleMouseEnter() {
@@ -24,14 +25,25 @@ class Square extends Component {
     });
   }
 
+  handleMouseDown() {
+    this.setState({
+      tile: this.props.hoverTile,
+    });
+    this.props.handleTilePlaced();
+  }
+
   render() {
     return (
       <div className='cell'
+           onMouseDown={this.handleMouseDown}
            onMouseEnter={this.handleMouseEnter}
            onMouseLeave={this.handleMouseLeave}
       >
         {this.state.hovered &&
-          <Tile id={this.props.hoverTile} />
+          <Tile hovered={true} type={this.props.hoverTile} />
+        }
+        {this.state.tile &&
+          <Tile type={this.state.tile} />
         }
       </div>
     )

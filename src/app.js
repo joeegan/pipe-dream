@@ -1,18 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import Grid from './components/grid'
 import Tile from './components/tile'
-import _ from 'lodash';
-import pipeTypes from './pipe-types';
+import _ from 'lodash'
+import pipeTypes from './pipe-types'
 
-const zeroArray = (n) => new Array(n).fill(0);
+const zeroArray = (n) => new Array(n).fill(0)
 
 class App extends Component {
 
   constructor(props: object) {
-    super(props);
+    super(props)
     this.state = {
-      controlTiles: _.shuffle((pipeTypes)),
-    };
+      controlTiles: _.shuffle(pipeTypes),
+    }
+    this.handleTilePlaced = this.handleTilePlaced.bind(this)
   }
 
   get controls() {
@@ -23,15 +24,24 @@ class App extends Component {
             type={cell}
           />
         </div>
-      );
-    });
+      )
+    })
+  }
+
+  handleTilePlaced() {
+    this.setState({
+      controlTiles: this.state.controlTiles
+                      .concat(_.sample(pipeTypes))
+                      .slice(1)
+    })
   }
 
   render() {
     return (
       <div>
         <div className='controls'>{this.controls}</div>
-        <Grid hoverTile={this.state.controlTiles[0]} />
+        <Grid hoverTile={this.state.controlTiles[0]}
+              handleTilePlaced={this.handleTilePlaced} />
       </div>
     )
   }
