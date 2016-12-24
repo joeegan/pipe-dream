@@ -1,16 +1,16 @@
 export const PipeTypes = {
-  VERTICAL: ['top', 'bottom'],
-  HORIZONTAL: ['left', 'right'],
-  BOTTOM_TO_RIGHT: ['bottom', 'right'],
-  BOTTOM_TO_LEFT: ['bottom', 'left'],
-  TOP_TO_RIGHT: ['top', 'right'],
-  TOP_TO_LEFT: ['top', 'left'],
-  CROSS: ['top', 'left'],
+  VERTICAL: ['north', 'south'],
+  HORIZONTAL: ['west', 'east'],
+  SOUTH_EAST: ['south', 'east'],
+  SOUTH_WEST: ['south', 'west'],
+  NORTH_EAST: ['north', 'east'],
+  NORTH_WEST: ['north', 'west'],
+  CROSS: ['north', 'west'],
 }
 
 export const StartTypes = {
-  RIGHT: ['right'],
-  BOTTOM: ['bottom'],
-  TOP: ['top'],
-  LEFT: ['left'],
+  EAST: ['east'],
+  BOTTOM: ['south'],
+  TOP: ['north'],
+  LEFT: ['west'],
 }

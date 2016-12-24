@@ -14,44 +14,44 @@
   transform: rotate(90deg) translate(0px, -1px);
 }
 
-.top_to_left,
-.top_to_right,
-.bottom_to_left,
-.bottom_to_right {
+.north_west,
+.north_east,
+.south_west,
+.south_east {
   width: 100%;
   border-radius: 30px;
   border-width: 20px;
 }
 
-.bottom_to_left {
+.south_west {
   transform: translate(-118px, 39px);
 }
-.top_to_left {
+.north_west {
   transform: translate(-118px, -79px);
 }
-.top_to_right {
+.north_east {
   transform: translate(0, -79px);
 }
-.bottom_to_right {
+.south_east {
   transform: translate(0px, 39px);
 }
 
-.left,
-.right,
-.top,
-.bottom {
+.west,
+.east,
+.north,
+.south {
   height: 50%;
   border-bottom: none;
   border-top: none;
 }
 
-.left {
+.west {
   transform: rotate(90deg) translate(24px, 24px)
 }
-.right {
+.east {
   transform: rotate(90deg) translate(25px, -26px);
 }
-.bottom {
+.south {
  transform: translate(0, 49px);
 }
 
@@ -60,12 +60,12 @@
   background: lightblue;
   position: absolute;
   width: 20px;
-  transition: height 5s;
+  transition: height 5s linear;
   height: 0;
   margin-left: -10px;
 }
-.top .water,
-.right .water {
+.north .water,
+.east .water {
   bottom: 0px;
 }
 .water.running {
