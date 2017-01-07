@@ -60,7 +60,7 @@
   background: lightblue;
   position: absolute;
   width: 20px;
-  transition: height 5s linear;
+  transition: height 1s linear;
   height: 0;
   margin-left: -10px;
 }

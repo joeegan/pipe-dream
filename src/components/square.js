@@ -11,6 +11,16 @@ class Square extends Component {
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
     this.handleMouseDown = this.handleMouseDown.bind(this)
+    this.handleTileFlowed = this.handleTileFlowed.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.coordinateRequired
+      && !this.state.tile
+      && !this.props.gameEnded
+    ) {
+      this.props.handleGameEnded();
+    }
   }
 
   handleMouseEnter() {
@@ -28,8 +38,19 @@ class Square extends Component {
   handleMouseDown() {
     this.setState({
       tile: this.props.hoverTile,
-    });
+    })
     this.props.handleTilePlaced();
+  }
+
+  handleTileFlowed() {
+    this.setState({
+      tileFlowed: true,
+    })
+    this.props.handleTileFlowed();
+  }
+
+  get exitDirection(){
+    return this.props.type
   }
 
   render() {
@@ -43,11 +64,22 @@ class Square extends Component {
           <Tile hovered={true} type={this.props.hoverTile} />
         }
         {this.state.tile &&
-          <Tile hovered={false} type={this.state.tile} />
+          <Tile
+            gameEnded={this.props.gameEnded}
+            coordinates={this.props.coordinates}
+            handleTileFlowed={this.handleTileFlowed}
+            hovered={false}
+            exitDirection={this.exitDirection}
+            type={this.state.tile}
+          />
         }
         {this.props.hasStartPipe &&
           <Tile
+            gameEnded={this.props.gameEnded}
+            exitDirection={this.props.startRotation}
+            coordinates={this.props.coordinates}
             waterRunning={this.props.waterRunning}
+            handleTileFlowed={this.props.handleTileFlowed}
             hovered={false}
             type={this.props.startRotation}
           />

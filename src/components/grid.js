@@ -1,33 +1,40 @@
 import React, { Component, PropTypes } from 'react'
 import Square from './square'
 import _ from 'lodash'
-import { StartTypes } from '../constants'
-
-const NUMBER_OF_COLS = 10
-const NUMBER_OF_ROWS = 7
+import { NUMBER_OF_COLS, NUMBER_OF_ROWS, alphabet } from '../constants'
 
 const zeroArray = (n) => new Array(n).fill(0)
 const grid = zeroArray(NUMBER_OF_ROWS).map(n => zeroArray(NUMBER_OF_COLS))
-const startCoordinates = [
-  _.random(1, NUMBER_OF_ROWS-2),
-  _.random(1, NUMBER_OF_COLS-2),
-]
-const startRotation = _.sample(Object.keys(StartTypes))
+
+const getCoordinate = (i, j) => {
+  return alphabet[i] + j;
+}
 
 class Grid extends Component {
 
+  constructor(props) {
+    super(props);
+  }
+
   get grid() {
+    const { props } = this;
     return grid.map((row, i) => {
       return (
         <div key={i} className='row'>{row.map((r, j) => {
           return (
             <Square
-              waterRunning={this.props.waterRunning}
-              hasStartPipe={_.isEqual(startCoordinates, [i,j], startCoordinates)}
-              startRotation={startRotation}
-              hoverTile={this.props.hoverTile}
-              handleTilePlaced={this.props.handleTilePlaced}
               key={j}
+              gameEnded={props.gameEnded}
+              coordinateRequired={props.coordinateRequired}
+              entranceRequired={props.entranceRequired}
+              coordinates={getCoordinate(i, j)}
+              waterRunning={props.waterRunning}
+              hasStartPipe={_.isEqual(props.startCoordinates, [i,j], props.startCoordinates)}
+              startRotation={props.startRotation}
+              hoverTile={props.hoverTile}
+              handleTilePlaced={props.handleTilePlaced}
+              handleTileFlowed={props.handleTileFlowed}
+              handleGameEnded={props.handleGameEnded}
             >
             </Square>
           )
@@ -45,6 +52,8 @@ class Grid extends Component {
 }
 
 Grid.propTypes = {
+  startCoordinates: PropTypes.array,
+  startRotation: PropTypes.string,
   waterRunning: PropTypes.bool,
   handleTilePlaced: PropTypes.func,
   hoverTile: PropTypes.string,

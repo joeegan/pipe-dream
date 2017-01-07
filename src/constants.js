@@ -10,7 +10,12 @@ export const PipeTypes = {
 
 export const StartTypes = {
   EAST: ['east'],
-  BOTTOM: ['south'],
-  TOP: ['north'],
-  LEFT: ['west'],
+  SOUTH: ['south'],
+  NORTH: ['north'],
+  WEST: ['west'],
 }
+
+export const NUMBER_OF_COLS = 10
+export const NUMBER_OF_ROWS = 7
+
+export const alphabet = 'abcdefghijklmnopqrstuvwxyz'
