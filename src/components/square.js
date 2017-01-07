@@ -7,6 +7,7 @@ class Square extends Component {
     super(props)
     this.state = {
       hovered: false,
+      hasWaterRunning: false,
     }
     this.handleMouseEnter = this.handleMouseEnter.bind(this)
     this.handleMouseLeave = this.handleMouseLeave.bind(this)
@@ -15,11 +16,25 @@ class Square extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.coordinateRequired
+    if (this.props.hasStartPipe && nextProps.hasWaterRunning) {
+      this.setState({
+        hasWaterRunning: true
+      })
+      return;
+    }
+    if (nextProps.coordinateRequired !== this.props.coordinates) {
+      return;
+    }
+
+    if ((nextProps.coordinateRequired == this.props.coordinates)
       && !this.state.tile
       && !this.props.gameEnded
     ) {
       this.props.handleGameEnded();
+    } else {
+      this.setState({
+        hasWaterRunning: true
+      })
     }
   }
 
@@ -46,7 +61,7 @@ class Square extends Component {
     this.setState({
       tileFlowed: true,
     })
-    this.props.handleTileFlowed();
+    this.props.handleTileFlowed(this.props.coordinates, 'NORTH'); //TODO hardcoded
   }
 
   get exitDirection(){
@@ -68,6 +83,7 @@ class Square extends Component {
             gameEnded={this.props.gameEnded}
             coordinates={this.props.coordinates}
             handleTileFlowed={this.handleTileFlowed}
+            hasWaterRunning={this.state.hasWaterRunning}
             hovered={false}
             exitDirection={this.exitDirection}
             type={this.state.tile}
@@ -78,7 +94,7 @@ class Square extends Component {
             gameEnded={this.props.gameEnded}
             exitDirection={this.props.startRotation}
             coordinates={this.props.coordinates}
-            waterRunning={this.props.waterRunning}
+            hasWaterRunning={this.state.hasWaterRunning}
             handleTileFlowed={this.props.handleTileFlowed}
             hovered={false}
             type={this.props.startRotation}

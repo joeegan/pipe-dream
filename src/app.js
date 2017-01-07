@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react'
 import Grid from './components/grid'
 import Tile from './components/tile'
 import { shuffle, sample, random } from 'lodash'
@@ -7,6 +7,7 @@ import {
   NUMBER_OF_ROWS,
   StartTypes,
   PipeTypes,
+  InverseDirectionMap,
   alphabet,
 } from './constants'
 
@@ -15,7 +16,10 @@ const startCoordinates = [
   random(1, NUMBER_OF_ROWS-2),
   random(1, NUMBER_OF_COLS-2),
 ]
-const suitablePipeAvailable = (coordinates, direction) => {
+
+const startRotation = sample(Object.keys(StartTypes))
+
+function getRequiredCoordinate(coordinates, direction) {
   const [row, column] = coordinates
   const rowIndex = alphabet.indexOf(row)
   const coordinateMap = {
@@ -24,20 +28,8 @@ const suitablePipeAvailable = (coordinates, direction) => {
     SOUTH: `${alphabet[rowIndex + 1]}${column}`,
     WEST: `${row}${+column - 1}`,
   }
-  const inverseDirectionMap = {
-    NORTH: 'SOUTH',
-    EAST: 'WEST',
-    SOUTH: 'NORTH',
-    WEST: 'EAST',
-  }
-  const coordinateRequired = coordinateMap[direction]
-  const entranceRequired = inverseDirectionMap[direction]
-  return {
-    coordinateRequired,
-    entranceRequired,
-  }
+  return coordinateMap[direction]
 }
-const startRotation = sample(Object.keys(StartTypes))
 
 class App extends Component {
 
@@ -50,33 +42,21 @@ class App extends Component {
       coordinateRequired: null,
       entranceRequired: null,
     }
-    setInterval(() => {
+    setTimeout(() => {
       this.setState({
-        waterRunning: true,
+        waterReleased: true,
       })
-    }, 1000);
+      console.log('water released')
+    }, 1000)
     this.handleTilePlaced = this.handleTilePlaced.bind(this)
-    this.handleGameEnded = this.handleGameEnded.bind(this)
     this.handleTileFlowed = this.handleTileFlowed.bind(this)
-  }
-
-  get controls() {
-    return this.state.controlTiles.map((cell, i) => {
-      return (
-        <div key={i} className='cell'>
-          <Tile
-            type={cell}
-          />
-        </div>
-      )
-    })
+    this.handleGameEnded = this.handleGameEnded.bind(this)
   }
 
   handleTileFlowed(coordinates, direction) {
-    const {coordinateRequired, entranceRequired } = suitablePipeAvailable(coordinates, direction);
     this.setState({
-      coordinateRequired,
-      entranceRequired
+      coordinateRequired: getRequiredCoordinate(coordinates, direction),
+      entranceRequired: InverseDirectionMap[direction],
     })
   }
 
@@ -95,18 +75,27 @@ class App extends Component {
     console.log('The game has ended')
   }
 
+  get controlTiles() {
+    return this.state.controlTiles.map((cell, i) => {
+      return (
+        <div key={i} className='cell'>
+          <Tile type={cell} />
+        </div>
+      )
+    })
+  }
+
   render() {
-    const { state } = this;
+    const { state } = this
     return (
       <div>
-        <div className='controls'>{this.controls}</div>
-        <Grid
-              gameEnded={state.gameEnded}
+        <div className='controls'>{this.controlTiles}</div>
+        <Grid gameEnded={state.gameEnded}
               coordinateRequired={state.coordinateRequired}
               entranceRequired={state.entranceRequired}
               startRotation={startRotation}
               startCoordinates={startCoordinates}
-              waterRunning={state.waterRunning}
+              waterReleased={state.waterReleased}
               hoverTile={state.controlTiles[0]}
               handleGameEnded={this.handleGameEnded}
               handleTilePlaced={this.handleTilePlaced}

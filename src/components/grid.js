@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Square from './square'
-import _ from 'lodash'
+import { isEqual } from 'lodash'
 import { NUMBER_OF_COLS, NUMBER_OF_ROWS, alphabet } from '../constants'
 
 const zeroArray = (n) => new Array(n).fill(0)
@@ -13,7 +13,7 @@ const getCoordinate = (i, j) => {
 class Grid extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   get grid() {
@@ -21,15 +21,18 @@ class Grid extends Component {
     return grid.map((row, i) => {
       return (
         <div key={i} className='row'>{row.map((r, j) => {
+          const coodinates = getCoordinate(i, j)
+          const hasStartPipe = isEqual(props.startCoordinates, [i,j], props.startCoordinates)
+          const hasWaterRunning = (hasStartPipe && props.waterReleased)
           return (
             <Square
               key={j}
               gameEnded={props.gameEnded}
               coordinateRequired={props.coordinateRequired}
               entranceRequired={props.entranceRequired}
-              coordinates={getCoordinate(i, j)}
-              waterRunning={props.waterRunning}
-              hasStartPipe={_.isEqual(props.startCoordinates, [i,j], props.startCoordinates)}
+              coordinates={coodinates}
+              hasWaterRunning={hasWaterRunning}
+              hasStartPipe={hasStartPipe}
               startRotation={props.startRotation}
               hoverTile={props.hoverTile}
               handleTilePlaced={props.handleTilePlaced}

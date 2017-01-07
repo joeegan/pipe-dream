@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { PipeTypes } from '../constants'
-import _ from 'lodash'
 
 class Tile extends Component {
 
@@ -13,7 +12,7 @@ class Tile extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.props.gameEnded
-      && nextProps.waterRunning
+      && nextProps.hasWaterRunning
       && !this.state.waterHasFlowed) {
       setTimeout(() => {
         this.props.handleTileFlowed(this.props.coordinates, this.props.exitDirection)
@@ -27,7 +26,7 @@ class Tile extends Component {
 
   render() {
     const pipeClassName= `pipe ${this.props.type}`
-    const waterRunningClassName = `water ${this.props.waterRunning ? 'running' : ''}`
+    const waterRunningClassName = `water ${this.props.hasWaterRunning ? 'running' : ''}`
     return (
       <div className='tile'
            style={{
@@ -39,8 +38,10 @@ class Tile extends Component {
         <span className={pipeClassName}>
           <span className={waterRunningClassName} />
         </span>
-        {this.props.type === 'CROSS' &&
-          <span className={pipeClassName} />
+        {!this.props.type.match(/VERTICAL|HORIZONTAL/g) &&
+          <span className={pipeClassName}>
+            <span className={waterRunningClassName} />
+          </span>
         }
       </div>
     )

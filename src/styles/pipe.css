@@ -2,57 +2,76 @@
   content: "";
   display: block;
   position: absolute;
-  border: solid 10px white;
-  border-bottom-width: 0;
-  border-top-width: 0;
+  background: white;
   height: 100%;
-  left: 38px;
+  width: 20px;
+  left: 39px;
 }
 
-.cross:last-of-type,
+.north,
+.south {
+  height: 50%;
+}
+
+.south {
+  bottom: 0;
+}
+
+.east,
+.west {
+  width: 50%;
+  height: 20px;
+  top: 38px;
+}
+
+.east {
+  left: 0;
+}
+.west {
+  right: 0;
+  left: inherit;
+}
+
+.cross:last-child,
 .horizontal {
-  transform: rotate(90deg) translate(0px, -1px);
+  width: 100%;
+  height: 20px;
+  top: 38px;
+  left: 0;
 }
 
 .north_west,
 .north_east,
 .south_west,
 .south_east {
-  width: 100%;
-  border-radius: 30px;
-  border-width: 20px;
-}
-
-.south_west {
-  transform: translate(-118px, 39px);
-}
-.north_west {
-  transform: translate(-118px, -79px);
-}
-.north_east {
-  transform: translate(0, -79px);
-}
-.south_east {
-  transform: translate(0px, 39px);
-}
-
-.west,
-.east,
-.north,
-.south {
   height: 50%;
-  border-bottom: none;
-  border-top: none;
 }
 
-.west {
-  transform: rotate(90deg) translate(24px, 24px)
+.south_west:first-child {
+  bottom: 0;
 }
-.east {
-  transform: rotate(90deg) translate(25px, -26px);
+
+.north_west:last-child,
+.north_east:last-child,
+.south_east:last-child,
+.south_west:last-child {
+  height: 20px;
+  width: 59px;
+  top: 42px;
 }
-.south {
- transform: translate(0, 49px);
+
+.north_east:first-child,
+.north_west:first-child {
+  height: 59px;
+}
+
+.north_west:last-child,
+.south_west:last-child {
+  left: 0;
+}
+.north_east:last-child,
+.south_east:last-child {
+  right: 0;
 }
 
 .water {
@@ -64,9 +83,10 @@
   height: 0;
   margin-left: -10px;
 }
+
 .north .water,
 .east .water {
-  bottom: 0px;
+  bottom: 0;
 }
 .water.running {
   height: 100%;
