@@ -25,7 +25,8 @@ class Tile extends Component {
   }
 
   render() {
-    const pipeClassName= `pipe ${this.props.type}`
+    const firstPipeClassName= `pipe ${this.props.type}`
+    const secondPipeClassName= `pipe ${this.props.type}`
     const waterRunningClassName = `water ${this.props.hasWaterRunning ? 'running' : ''}`
     return (
       <div className='tile'
@@ -35,11 +36,11 @@ class Tile extends Component {
                 zIndex: this.props.hovered ? 1 : 0,
               }}
       >
-        <span className={pipeClassName}>
+        <span className={firstPipeClassName}>
           <span className={waterRunningClassName} />
         </span>
-        {!this.props.type.match(/VERTICAL|HORIZONTAL/g) &&
-          <span className={pipeClassName}>
+        {!this.props.type.match(/^(VERTICAL|HORIZONTAL|NORTH|EAST|SOUTH|WEST)$/g) &&
+          <span className={secondPipeClassName}>
             <span className={waterRunningClassName} />
           </span>
         }
