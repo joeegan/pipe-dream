@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { PipeTypes } from '../constants'
+import {
+  PipeTypes,
+  PipeTypesFromDirection,
+  FlowDirectionFromWaterEntrance
+} from '../constants'
 
 class Tile extends Component {
 
@@ -24,24 +28,41 @@ class Tile extends Component {
     }
   }
 
+  get waterRunningClassName() {
+    return `water ${this.props.hasWaterRunning ? 'running ' : ''}`
+  }
+
+  get firstWaterRunningClassName() {
+    const { waterEntranceDirection, type } = this.props
+    const [firstPipeType] = PipeTypesFromDirection[type]
+    if (waterEntranceDirection && FlowDirectionFromWaterEntrance[waterEntranceDirection][firstPipeType]) {
+      debugger;
+      return this.waterRunningClassName
+        + FlowDirectionFromWaterEntrance[waterEntranceDirection][firstPipeType]
+    }
+  }
+
+  get secondWaterRunningClassName() {
+    const { waterEntranceDirection, type } = this.props
+    const [, secondPipeType] = PipeTypesFromDirection[type]
+    if (waterEntranceDirection && FlowDirectionFromWaterEntrance[waterEntranceDirection][secondPipeType]) {
+      return this.waterRunningClassName
+        + FlowDirectionFromWaterEntrance[waterEntranceDirection][secondPipeType]
+    }
+
+  }
+
   render() {
-    const firstPipeClassName= `pipe ${this.props.type}`
-    const secondPipeClassName= `pipe ${this.props.type}`
-    const waterRunningClassName = `water ${this.props.hasWaterRunning ? 'running' : ''}`
+    const { props } = this
+    const [firstPipeType, secondPipeType] = PipeTypesFromDirection[props.type]
     return (
-      <div className='tile'
-           style={{
-                opacity: this.props.hovered ? 0.4 : 1,
-                background: this.props.hovered ? 'blue' : 'lightgreen',
-                zIndex: this.props.hovered ? 1 : 0,
-              }}
-      >
-        <span className={firstPipeClassName}>
-          <span className={waterRunningClassName} />
+      <div className={`tile ${props.hovered ? 'hovered' : ''}`}>
+        <span className={`pipe ${firstPipeType}`}>
+          <span className={this.firstWaterRunningClassName} />
         </span>
-        {!this.props.type.match(/^(VERTICAL|HORIZONTAL|NORTH|EAST|SOUTH|WEST)$/g) &&
-          <span className={secondPipeClassName}>
-            <span className={waterRunningClassName} />
+        {secondPipeType &&
+          <span className={`pipe ${secondPipeType}`}>
+            <span className={this.secondWaterRunningClassName} />
           </span>
         }
       </div>
@@ -50,9 +71,10 @@ class Tile extends Component {
 }
 
 Tile.propTypes = {
-  type: React.PropTypes.string,
-  hovered: React.PropTypes.bool,
-  waterRunning: React.PropTypes.bool,
+  type: PropTypes.string,
+  hovered: PropTypes.bool,
+  waterRunning: PropTypes.bool,
+  waterEntranceDirection: PropTypes.string,
 }
 
 export default Tile;

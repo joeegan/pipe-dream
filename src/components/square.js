@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Tile from './tile';
+import { InverseDirectionMap } from '../constants'
 
 class Square extends Component {
 
@@ -16,21 +17,22 @@ class Square extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.hasStartPipe && nextProps.hasWaterRunning) {
+    const { props, state } = this
+    if (props.hasStartPipe && nextProps.hasWaterRunning) {
       this.setState({
         hasWaterRunning: true
       })
       return;
     }
-    if (nextProps.coordinateRequired !== this.props.coordinates) {
+    if (nextProps.coordinateRequired !== props.coordinates) {
       return;
     }
 
-    if ((nextProps.coordinateRequired == this.props.coordinates)
-      && !this.state.tile
-      && !this.props.gameEnded
+    if ((nextProps.coordinateRequired == props.coordinates)
+      && !state.tile
+      && !props.gameEnded
     ) {
-      this.props.handleGameEnded();
+      props.handleGameEnded();
     } else {
       this.setState({
         hasWaterRunning: true
@@ -69,35 +71,40 @@ class Square extends Component {
   }
 
   render() {
+    const { props, state } = this
     return (
-      <div className='cell'
-           onMouseDown={this.handleMouseDown}
-           onMouseEnter={this.handleMouseEnter}
-           onMouseLeave={this.handleMouseLeave}
+      <div
+        className='cell'
+        onMouseDown={this.handleMouseDown}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
-        {this.state.hovered &&
-          <Tile hovered={true} type={this.props.hoverTile} />
+        {state.hovered &&
+          <Tile hovered={true} type={props.hoverTile} />
         }
-        {this.state.tile &&
+        {state.tile &&
           <Tile
-            gameEnded={this.props.gameEnded}
-            coordinates={this.props.coordinates}
+            gameEnded={props.gameEnded}
+            coordinates={props.coordinates}
+            entranceRequired={props.entranceRequired}
+            coordinatesRequired={props.coordinatesRequired}
             handleTileFlowed={this.handleTileFlowed}
-            hasWaterRunning={this.state.hasWaterRunning}
+            hasWaterRunning={state.hasWaterRunning}
             hovered={false}
             exitDirection={this.exitDirection}
-            type={this.state.tile}
+            type={state.tile}
           />
         }
-        {this.props.hasStartPipe &&
+        {props.hasStartPipe &&
           <Tile
-            gameEnded={this.props.gameEnded}
-            exitDirection={this.props.startRotation}
-            coordinates={this.props.coordinates}
-            hasWaterRunning={this.state.hasWaterRunning}
-            handleTileFlowed={this.props.handleTileFlowed}
+            gameEnded={props.gameEnded}
+            waterEntranceDirection={InverseDirectionMap[props.startRotation]}
+            exitDirection={props.startRotation}
+            coordinates={props.coordinates}
+            hasWaterRunning={state.hasWaterRunning}
+            handleTileFlowed={props.handleTileFlowed}
             hovered={false}
-            type={this.props.startRotation}
+            type={props.startRotation}
           />
         }
       </div>

@@ -15,7 +15,7 @@
 
 .east,
 .west {
-  width: 58px;
+  width: 59px;
   height: 20px;
   top: 38px;
 }
@@ -30,132 +30,9 @@
   bottom: 0;
 }
 
-.cross:last-child,
 .horizontal {
   width: 100%;
   height: 20px;
   top: 38px;
   left: 0;
-}
-
-.north_west,
-.north_east,
-.south_west,
-.south_east {
-  height: 50%;
-}
-
-/* first-child is always the north or south */
-/* last-child is always the east west */
-
-.south_west:first-child {
-  bottom: 0;
-}
-
-.north_west:last-child,
-.north_east:last-child,
-.south_east:last-child,
-.south_west:last-child {
-  height: 20px;
-  width: 59px;
-  top: 38px;
-}
-
-.north_east:first-child,
-.north_west:first-child {
-  height: 58px;
-}
-
-.north_west:last-child,
-.south_west:last-child {
-  left: 0;
-}
-.north_east:last-child,
-.south_east:last-child {
-  right: 0;
-}
-
-.water {
-  display: block;
-  background: lightblue;
-  position: absolute;
-}
-
-.north_east.flow_east .water:last-child {
-  width: 0;
-  height: 20px;
-  left: 0;
-  right: inherit;
-}
-.north_east.flow_east .water.running:last-child {
-  width: 100%;
-}
-
-.north_east.flow_north .water:last-child {
-  width: 0;
-  height: 20px;
-  left: 0;
-  right: inherit;
-}
-
-
-.flow_south .water,
-.south .water {
-  top: 0;
-}
-
-.flow_north .water,
-.north .water {
-  bottom: 0;
-}
-
-.south .water.running {
-  height: 100%;
-  transition: height 1s linear;
-}
-
-.south .water,
-.north .water,
-.flow_south .water,
-.flow_north .water {
-  height: 0;
-  width: 20px;
-  transition: height 1s linear;
-}
-
-.west .water {
-  right: 0;
-}
-
-.east .water,
-.west .water,
-.flow_east .water,
-.flow_west .water {
-  width: 0;
-  height: 20px;
-  transition: width 1s linear;
-}
-
-.south .water.running,
-.north .water.running,
-.flow_south .water.running,
-.flow_north .water.running {
-  height: 100%;
-}
-
-.east .water.running,
-.west .water.running,
-.flow_east .water.running,
-.flow_west .water.running {
-  width: 100%;
-}
-
-.flow_north .water,
-.north .water {
-  bottom: 0;
-}
-
-.flow_south .water,
-.south .water {
-  bottom: 0;
 }
