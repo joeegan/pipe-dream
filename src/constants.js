@@ -1,12 +1,12 @@
-export const PipeTypes = {
-  VERTICAL: ['NORTH', 'SOUTH'],
-  HORIZONTAL: ['WEST', 'EAST'],
-  SOUTH_EAST: ['SOUTH', 'EAST'],
-  SOUTH_WEST: ['SOUTH', 'WEST'],
-  NORTH_EAST: ['NORTH', 'EAST'],
-  NORTH_WEST: ['NORTH', 'WEST'],
-  CROSS: ['NORTH', 'EAST', 'SOUTH', 'WEST'],
-}
+export const PipeTypes = [
+  'VERTICAL',
+  'HORIZONTAL',
+  'SOUTH_EAST',
+  'SOUTH_WEST',
+  'NORTH_EAST',
+  'NORTH_WEST',
+  'CROSS',
+]
 
 export const PipeTypesFromDirection = {
   EAST: ['EAST'],
@@ -52,14 +52,14 @@ export const InverseDirectionMap = {
   WEST: 'EAST',
 }
 
-export const StartTypes = {
-  EAST: ['EAST'],
-  SOUTH: ['SOUTH'],
-  NORTH: ['NORTH'],
-  WEST: ['WEST'],
-}
+export const StartTypes = [
+  'NORTH',
+  'EAST',
+  'SOUTH',
+  'WEST',
+]
 
-export const NUMBER_OF_COLS = 10
-export const NUMBER_OF_ROWS = 7
+export const NUMBER_OF_COLS = 5
+export const NUMBER_OF_ROWS = 5
 
 export const alphabet = 'abcdefghijklmnopqrstuvwxyz'

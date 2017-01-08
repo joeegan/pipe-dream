@@ -1,3 +1,13 @@
+/*
+  Has knowledge of...
+  * start piece
+  * 'control' tiles (tiles to place)
+  * waterRunning (bool)
+  * gameEnded
+  * score
+  * coordinate (and direction) required to fill
+*/
+
 import React, { Component, PropTypes } from 'react'
 import Grid from './components/grid'
 import Tile from './components/tile'
@@ -12,12 +22,9 @@ import {
 } from './constants'
 
 const zeroArray = (n) => new Array(n).fill(0)
-const startCoordinates = [
-  random(1, NUMBER_OF_ROWS-2),
-  random(1, NUMBER_OF_COLS-2),
-]
+const startCoordinates = alphabet[random(1, NUMBER_OF_ROWS-2)] + random(1, NUMBER_OF_COLS-2)
 
-const startRotation = sample(Object.keys(StartTypes))
+const startRotation = sample(StartTypes)
 
 function getRequiredCoordinate(coordinates, direction) {
   const [row, column] = coordinates
@@ -37,7 +44,7 @@ class App extends Component {
     super(props)
     this.state = {
       gameEnded: false,
-      controlTiles: shuffle(Object.keys(PipeTypes)),
+      controlTiles: shuffle(PipeTypes),
       waterRunning: false,
       coordinateRequired: null,
       entranceRequired: null,
@@ -47,7 +54,7 @@ class App extends Component {
         waterReleased: true,
       })
       console.log('water released')
-    }, 1000)
+    }, 4000)
     this.handleTilePlaced = this.handleTilePlaced.bind(this)
     this.handleTileFlowed = this.handleTileFlowed.bind(this)
     this.handleGameEnded = this.handleGameEnded.bind(this)
@@ -63,7 +70,7 @@ class App extends Component {
   handleTilePlaced() {
     this.setState({
       controlTiles: this.state.controlTiles
-                      .concat(sample(Object.keys(PipeTypes)))
+                      .concat(sample(PipeTypes))
                       .slice(1)
     })
   }

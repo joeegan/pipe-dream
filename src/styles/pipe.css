@@ -8,6 +8,13 @@
   left: 39px;
 }
 
+.horizontal {
+  width: 100%;
+  height: 20px;
+  top: 38px;
+  left: 0;
+}
+
 .north,
 .south {
   height: 50%;
@@ -28,11 +35,4 @@
 }
 .south {
   bottom: 0;
-}
-
-.horizontal {
-  width: 100%;
-  height: 20px;
-  top: 38px;
-  left: 0;
 }

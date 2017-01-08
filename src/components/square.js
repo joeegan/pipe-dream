@@ -59,11 +59,12 @@ class Square extends Component {
     this.props.handleTilePlaced();
   }
 
-  handleTileFlowed() {
+  handleTileFlowed(coordinates, direction) {
     this.setState({
       tileFlowed: true,
+      historicEntranceRequired: this.props.entranceRequired,
     })
-    this.props.handleTileFlowed(this.props.coordinates, 'NORTH'); //TODO hardcoded
+    this.props.handleTileFlowed(coordinates, direction);
   }
 
   get exitDirection(){
@@ -86,8 +87,8 @@ class Square extends Component {
           <Tile
             gameEnded={props.gameEnded}
             coordinates={props.coordinates}
-            entranceRequired={props.entranceRequired}
             coordinatesRequired={props.coordinatesRequired}
+            waterEntranceDirection={props.entranceRequired  || this.state.historicEntranceRequired}
             handleTileFlowed={this.handleTileFlowed}
             hasWaterRunning={state.hasWaterRunning}
             hovered={false}
@@ -102,7 +103,7 @@ class Square extends Component {
             exitDirection={props.startRotation}
             coordinates={props.coordinates}
             hasWaterRunning={state.hasWaterRunning}
-            handleTileFlowed={props.handleTileFlowed}
+            handleTileFlowed={this.handleTileFlowed}
             hovered={false}
             type={props.startRotation}
           />

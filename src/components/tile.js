@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import {
-  PipeTypes,
   PipeTypesFromDirection,
   FlowDirectionFromWaterEntrance
 } from '../constants'
@@ -22,6 +21,7 @@ class Tile extends Component {
         this.props.handleTileFlowed(this.props.coordinates, this.props.exitDirection)
         this.setState({
           waterHasFlowed: true,
+          historicWaterEntranceDirection: this.props.waterEntranceDirection,
         })
         console.log('tile has finished flowing')
       }, 1000)
@@ -35,8 +35,8 @@ class Tile extends Component {
   get firstWaterRunningClassName() {
     const { waterEntranceDirection, type } = this.props
     const [firstPipeType] = PipeTypesFromDirection[type]
-    if (waterEntranceDirection && FlowDirectionFromWaterEntrance[waterEntranceDirection][firstPipeType]) {
-      debugger;
+    const entranceDirection = waterEntranceDirection || this.state.historicWaterEntranceDirection
+    if (entranceDirection && FlowDirectionFromWaterEntrance[entranceDirection][firstPipeType]) {
       return this.waterRunningClassName
         + FlowDirectionFromWaterEntrance[waterEntranceDirection][firstPipeType]
     }
@@ -45,7 +45,8 @@ class Tile extends Component {
   get secondWaterRunningClassName() {
     const { waterEntranceDirection, type } = this.props
     const [, secondPipeType] = PipeTypesFromDirection[type]
-    if (waterEntranceDirection && FlowDirectionFromWaterEntrance[waterEntranceDirection][secondPipeType]) {
+        const entranceDirection = waterEntranceDirection || this.state.historicWaterEntranceDirection
+    if ((entranceDirection && FlowDirectionFromWaterEntrance[entranceDirection][secondPipeType]) || this.state.waterHasFlowed) {
       return this.waterRunningClassName
         + FlowDirectionFromWaterEntrance[waterEntranceDirection][secondPipeType]
     }

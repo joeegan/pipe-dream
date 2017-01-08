@@ -1,0 +1,45 @@
+.water {
+  display: block;
+  background: lightblue;
+  position: absolute;
+}
+
+.flow_north {
+  bottom: 0;
+}
+
+.flow_east {
+  left: 0;
+}
+
+.flow_south {
+  top: 0;
+}
+
+.flow_west {
+  right: 0;
+}
+
+.flow_south,
+.flow_north {
+  height: 0;
+  width: 20px;
+  transition: height 4s linear;
+}
+
+.flow_east,
+.flow_west {
+  width: 0;
+  height: 20px;
+  transition: width 4s linear;
+}
+
+.flow_east.running,
+.flow_west.running {
+  width: 100%;
+}
+
+.flow_north.running,
+.flow_south.running {
+  height: 100%;
+}

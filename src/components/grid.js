@@ -1,3 +1,8 @@
+/*
+  Renders a grid of squares which are passed game data from app.js
+*/
+
+
 import React, { Component, PropTypes } from 'react'
 import Square from './square'
 import { isEqual } from 'lodash'
@@ -21,16 +26,18 @@ class Grid extends Component {
     return grid.map((row, i) => {
       return (
         <div key={i} className='row'>{row.map((r, j) => {
-          const coodinates = getCoordinate(i, j)
-          const hasStartPipe = isEqual(props.startCoordinates, [i,j], props.startCoordinates)
-          const hasWaterRunning = (hasStartPipe && props.waterReleased)
+          const coordinates = getCoordinate(i, j)
+          const hasStartPipe = isEqual(props.startCoordinates, coordinates)
+          const isRequired = isEqual(props.coordinateRequired, coordinates)
+          const hasWaterRunning = (hasStartPipe && props.waterReleased) || isRequired;
           return (
             <Square
               key={j}
               gameEnded={props.gameEnded}
               coordinateRequired={props.coordinateRequired}
               entranceRequired={props.entranceRequired}
-              coordinates={coodinates}
+              coordinates={coordinates}
+              isRequired={isRequired}
               hasWaterRunning={hasWaterRunning}
               hasStartPipe={hasStartPipe}
               startRotation={props.startRotation}
@@ -55,7 +62,7 @@ class Grid extends Component {
 }
 
 Grid.propTypes = {
-  startCoordinates: PropTypes.array,
+  startCoordinates: PropTypes.string,
   startRotation: PropTypes.string,
   waterRunning: PropTypes.bool,
   handleTilePlaced: PropTypes.func,
